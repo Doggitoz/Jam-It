@@ -64,6 +64,8 @@ public class ProgressUI : MonoBehaviour
                     newImage.GetComponent<Image>().color = data.Color;
                 }
 
+                //DEBUG STUFF
+                newImage.GetComponent<Image>().color = data.Color;
 
                 //Update added index
                 addedIndex++;
