@@ -39,7 +39,9 @@ public class GameManager : MonoBehaviour
         
     }
 
-    private void ChangeState(GameState newState)
+    public GameState GetState() { return currState; }
+
+    public void ChangeState(GameState newState)
     {
         currState = newState;
 
@@ -57,5 +59,5 @@ public class GameManager : MonoBehaviour
 [System.Serializable]
 public enum GameState
 {
-    Menu, Paused, Picking, Smashing, Juicing, Mixing, Heating, Packaging //This might be too many states idrk
+    Menu, Paused, Progress, Playing //This might be too many states idrk
 }
