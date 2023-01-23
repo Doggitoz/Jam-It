@@ -23,14 +23,7 @@ public class ProgressUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("TODO: IT DOESNT DELETE THE IMAGES AFTER UNLOADING THEM LOL");
         displayCatalog = new GameObject[rows, columns];
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void LoadImages()
@@ -57,6 +50,8 @@ public class ProgressUI : MonoBehaviour
 
                 Vector2 location = new Vector2(HorizontalImageOffset * (j - 3), VerticalImageOffset * (3 - i));
                 GameObject newImage;
+
+                //Change sprite information
                 if (data.Type == CreationType.Jam)
                 {
                     newImage = Instantiate(JamTemplate);
@@ -70,6 +65,11 @@ public class ProgressUI : MonoBehaviour
                     Debug.LogError("SOMEHOW THIS GOT TO AN ERROR TYPE IDK MAN");
                     newImage = Instantiate(JamTemplate);
                 }
+
+                //If recipe is empty, disable inside
+
+
+                //Set UI element location
                 newImage.transform.SetParent(UIPanel.transform);
                 newImage.GetComponent<RectTransform>().localPosition = location;
                 newImage.GetComponent<RectTransform>().localScale = Vector3.one * ImageScale;
@@ -108,6 +108,9 @@ public class ProgressUI : MonoBehaviour
 
     public void OpenUI()
     {
+        if (GameManager.GM.GetState() == GameState.Menu) return;
+        if (GameManager.GM.GetState() == GameState.Paused) return;
+        GameManager.GM.ChangeState(GameState.Progress);
         isOpen = true;
         UIPanel.SetActive(true);
         PreviousButton.SetActive(false);
@@ -118,6 +121,9 @@ public class ProgressUI : MonoBehaviour
 
     public void CloseUI()
     {
+        if (GameManager.GM.GetState() == GameState.Menu) return;
+        if (GameManager.GM.GetState() == GameState.Paused) return;
+        GameManager.GM.ChangeState(GameState.Playing);
         isOpen = false;
         UIPanel.SetActive(false);
     }

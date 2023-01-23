@@ -21,6 +21,7 @@ public class RecipeHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("TODO: Rework algorithm to accomodate empties and jam vs juice");
         if (debugOne != null) AddIngredient(debugOne);
         if (debugTwo != null) AddIngredient(debugTwo);
         if (debugThree != null) AddIngredient(debugThree);
