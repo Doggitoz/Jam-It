@@ -20,6 +20,7 @@ public class HoverCreation : MonoBehaviour
     {
         Debug.Log("TODO: Change text recipe to image recipe");
         Debug.Log("TODO: Scale panel with element size");
+        Debug.Log("TODO: This stopped working when I added in layers to the images for colors");
         UILayer = LayerMask.NameToLayer("UI");
         if (GameManager.GM.GetState() != GameState.Progress) DisableHoverUI();
     }

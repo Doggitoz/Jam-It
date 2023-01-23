@@ -918,7 +918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.26981133, b: 0.26981133, a: 0.7372549}
+  m_Color: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 0.7372549}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1935,7 +1935,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_TargetDisplay: 0
 --- !u!224 &1516415002
 RectTransform:
@@ -1976,7 +1976,8 @@ MonoBehaviour:
   rows: 5
   columns: 5
   UIPanel: {fileID: 559094249}
-  ImageTemplate: {fileID: 3440176943774252136, guid: 5a2b6c3280c8d084a8934a1206be1ee1, type: 3}
+  JamTemplate: {fileID: 3440176943774252136, guid: c4df6dc88985b6442bc540427820460c, type: 3}
+  JuiceTemplate: {fileID: 3440176943774252136, guid: 5a2b6c3280c8d084a8934a1206be1ee1, type: 3}
   PreviousButton: {fileID: 19733508}
   NextButton: {fileID: 1087468274}
   ch: {fileID: 891004763}
