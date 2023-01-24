@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ingredient : MonoBehaviour, System.IComparable<Ingredient>
+[CreateAssetMenu(fileName = "Ingredient", menuName = "Asset/Ingredient")]
+public class Ingredient : ScriptableObject
 {
     public string CharacterRepresentation;
     public string IngredientName;
     public IngredientType IngredientType = IngredientType.Unprocessed;
-
-    public int CompareTo(Ingredient other)
-    {
-        return string.Compare(CharacterRepresentation, other.CharacterRepresentation);
-    }
-
+    public Sprite Sprite;
 }
 
 public enum IngredientType

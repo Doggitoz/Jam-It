@@ -5,60 +5,31 @@ using UnityEngine;
 
 public class RecipeManager : MonoBehaviour
 {
-    public Ingredient debugOne;
-    public Ingredient debugTwo;
-    public Ingredient debugThree;
 
-    List<Ingredient> ingredientList = new List<Ingredient>();
     List<List<Ingredient>> subsets = new List<List<Ingredient>>();
 
     bool hasSmashedIngredient = false;
     
 
-
-    // Start is called before the first frame update
     void Start()
     {
         Debug.Log("TODO: Rework algorithm to accomodate empties and jam vs juice");
         Debug.Log("TODO: Allocate for nothings to be returned");
-        if (debugOne != null) AddIngredient(debugOne);
-        if (debugTwo != null) AddIngredient(debugTwo);
-        if (debugThree != null) AddIngredient(debugThree);
-        StartRecipeCheck();
+        Debug.Log("TODO: Should prioritize table or door");
     }
 
-    public Creation RecipeAlgorithm()
+    public Creation RecipeAlgorithm(List<Ingredient> ingredientList)
     {
         Creation creation;
-        ClearIngredients();
         subsets = new List<List<Ingredient>>();
-        creation = StartRecipeCheck();
+        creation = StartRecipeCheck(ingredientList);
         return creation;
     }
 
-    #region Ingredient Manipulation
-    public void AddIngredient(Ingredient ing)
-    {
-        if (ingredientList.Count > 3) return;
-        ingredientList.Add(ing);
-    }
-
-    public void RemoveIngredient(int slot)
-    {
-        ingredientList.RemoveAt(slot);
-    }
-
-    public void ClearIngredients()
-    {
-        ingredientList = new List<Ingredient>();
-        hasSmashedIngredient = false;
-    }
-    #endregion
-
-    public Creation StartRecipeCheck()
+    public Creation StartRecipeCheck(List<Ingredient> ingredientList)
     {
         //Creates all subsets into subsets<>
-        CreateSubsets(new List<Ingredient>(), 0);
+        CreateSubsets(ingredientList, new List<Ingredient>(), 0);
 
         //Remove invalid subsets
         foreach (List<Ingredient> listIng in subsets.ToList())
@@ -103,6 +74,9 @@ public class RecipeManager : MonoBehaviour
                 break;
             }
         }
+
+        //EVERYTHING UP TO HERE IS REALLY GOOD AND CLEAN AND SHOULD NOT BE TOUCHED!!!!!!!!!
+        //BELOW.... UHHH....
 
         //If there is three ingredients, check if it has a valid recipe
         if (subsetSizeThree.Count > 0)
@@ -167,7 +141,7 @@ public class RecipeManager : MonoBehaviour
         }
         return str;
     }
-    public void CreateSubsets(List<Ingredient> output, int currIndex)
+    public void CreateSubsets(List<Ingredient> ingredientList, List<Ingredient> output, int currIndex)
     {
         if (currIndex == ingredientList.Count)
         {
@@ -175,9 +149,9 @@ public class RecipeManager : MonoBehaviour
             return;
         }
 
-        CreateSubsets(new List<Ingredient>(output), currIndex + 1);
+        CreateSubsets(ingredientList, new List<Ingredient>(output), currIndex + 1);
 
         output.Add(ingredientList[currIndex]);
-        CreateSubsets(new List<Ingredient>(output), currIndex + 1);
+        CreateSubsets(ingredientList, new List<Ingredient>(output), currIndex + 1);
     }
 }

@@ -1283,6 +1283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingState: 3
+  RM: {fileID: 6655026033411740103}
+  CM: {fileID: 6862240259370862253}
   ClickedTable: 0
   ProcessingJam: 0
 --- !u!1 &6185317393284579191
@@ -1833,6 +1835,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eca33053caee6447853988ba2d95a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugOne: {fileID: 0}
-  debugTwo: {fileID: 0}
-  debugThree: {fileID: 0}

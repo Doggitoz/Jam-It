@@ -8,13 +8,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameState StartingState;
     GameState _currState;
     PlayingState _playingState;
-    public RecipeManager RM { get; private set; }
-    public CreationsManager CM { get; private set; }
+    public RecipeManager RM;
+    public CreationsManager CM;
 
     //Playing state variables
     public bool ClickedTable;
     public bool ProcessingJam;
-    Ingredient[] _selectedIngredients;
+    List<Ingredient> ingredientList = new List<Ingredient>(3);
     Creation _currentCreation;
     private void Awake()
     {
@@ -147,6 +147,7 @@ public class GameManager : MonoBehaviour
     void StartPicking()
     {
         _currentCreation = null; // Reset the crafted creation when entering Picking phase
+        ingredientList.Clear();
 
         //Have logic to check if door is missing or not?
         SetCamera(0f, 1f);
@@ -163,34 +164,42 @@ public class GameManager : MonoBehaviour
 
     void StartMixing()
     {
-
+        _currentCreation = RM.RecipeAlgorithm(ingredientList);
+        SetCamera(46f, 1f);
     }
 
     void StartHeating()
     {
-
+        SetCamera(69f, 1f);
     }
 
     void StartPackaging()
     {
-
+        SetCamera(92f, 1f);
     }
 
     void StartFinished()
     {
-
+        SetCamera(115f, 1f);
     }
 
     #endregion
 
-    public void AddIngredient()
+    public void AddIngredient(Ingredient ing)
     {
-
+        for (int i = 0; i < 3; i++)
+        {
+            if (ingredientList[i] != null)
+            {
+                ingredientList.Insert(i, ing);
+                Debug.Log("Inserted " + ing.IngredientName + " to slot " + i);
+            }
+        }
     }
 
-    public  void RemoveIngredient()
+    public  void RemoveIngredient(int index)
     {
-
+        ingredientList.RemoveAt(index);
     }
 
     public Creation GetCurrentCreation()

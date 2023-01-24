@@ -46,63 +46,63 @@ public class ProgressUI : MonoBehaviour
         {
             for (int j = 1; j <= columns; j++)
             {
-                ////Creation data = ch.GetCreationAtIndex((int) (baseIndex + addedIndex));
-                //if (data == null) continue;
+                Creation data = GameManager.GM.CM.GetCreationAtIndex((int) (baseIndex + addedIndex));
+                if (data == null) continue;
 
-                //Vector2 location = new Vector2(HorizontalImageOffset * (j - 3), VerticalImageOffset * (3 - i));
-                //GameObject newImage;
+                Vector2 location = new Vector2(HorizontalImageOffset * (j - 3), VerticalImageOffset * (3 - i));
+                GameObject newImage;
 
-                ////Change sprite information
-                //if (data.Type == CreationType.Jam)
-                //{
-                //    newImage = Instantiate(JamTemplate);
-                //}
-                //else if (data.Type == CreationType.Juice)
-                //{
-                //    newImage = Instantiate(JuiceTemplate);
-                //}
-                //else
-                //{
-                //    Debug.LogError("SOMEHOW THIS GOT TO AN ERROR TYPE IDK MAN");
-                //    newImage = Instantiate(JamTemplate);
-                //}
+                //Change sprite information
+                if (data.Type == CreationType.Jam)
+                {
+                    newImage = Instantiate(JamTemplate);
+                }
+                else if (data.Type == CreationType.Juice)
+                {
+                    newImage = Instantiate(JuiceTemplate);
+                }
+                else
+                {
+                    Debug.LogError("SOMEHOW THIS GOT TO AN ERROR TYPE IDK MAN");
+                    newImage = Instantiate(JamTemplate);
+                }
 
-                ////If recipe is empty, disable inside
+                //If recipe is empty, disable inside
 
 
-                ////Set UI element location
-                //newImage.transform.SetParent(UIPanel.transform);
-                //newImage.GetComponent<RectTransform>().localPosition = location;
-                //newImage.GetComponent<RectTransform>().localScale = Vector3.one * ImageScale;
+                //Set UI element location
+                newImage.transform.SetParent(UIPanel.transform);
+                newImage.GetComponent<RectTransform>().localPosition = location;
+                newImage.GetComponent<RectTransform>().localScale = Vector3.one * ImageScale;
 
-                ////LOGIC TO DISPLAY PROPER IMAGE
-                //ImageData id = newImage.GetComponent<ImageData>();
-                //if (data.TimesMade > 0)
-                //{
-                //    id.Name = data.Name + " " + data.Type.ToString();
-                //}
-                //else
-                //{
-                //    id.Name = data.IsSecret ? "???" : data.Name + " " + data.Type.ToString();
-                //}
-                
-                //id.Quip = data.TimesMade > 0 ? data.Quip : "";
-                //id.Recipe = data.TimesMade > 0 ? data.Recipe : "";
-                //id.TimesMade = data.TimesMade;
+                //LOGIC TO DISPLAY PROPER IMAGE
+                ImageData id = newImage.GetComponent<ImageData>();
+                if (data.TimesMade > 0)
+                {
+                    id.Name = data.Name + " " + data.Type.ToString();
+                }
+                else
+                {
+                    id.Name = data.IsSecret ? "???" : data.Name + " " + data.Type.ToString();
+                }
 
-                ////IMAGE COLOR LOGIC
-                //newImage.GetComponent<Image>().color = data.Color;
+                id.Quip = data.TimesMade > 0 ? data.Quip : "";
+                id.Recipe = data.TimesMade > 0 ? data.Recipe : "";
+                id.TimesMade = data.TimesMade;
 
-                //if (data.TimesMade < 1  && !debugDisplay)
-                //{
-                //    id.EnableCover();
-                //}
+                //IMAGE COLOR LOGIC
+                newImage.GetComponent<Image>().color = data.Color;
 
-                ////Update added index
-                //addedIndex++;
+                if (data.TimesMade < 1 && !debugDisplay)
+                {
+                    id.EnableCover();
+                }
 
-                ////Store in array for deletion later
-                //displayCatalog[i - 1, j - 1] = newImage;
+                //Update added index
+                addedIndex++;
+
+                //Store in array for deletion later
+                displayCatalog[i - 1, j - 1] = newImage;
             }
         }
     }
@@ -131,19 +131,19 @@ public class ProgressUI : MonoBehaviour
 
     public void NextPage()
     {
-        //int maxNumPages = Mathf.CeilToInt(ch.GetCreationListSize() / (float)(rows * columns));
-        //if (pageNum >= maxNumPages) return;
-        //if (pageNum == maxNumPages - 1)
-        //{
-        //    pageNum++;
-        //    NextButton.SetActive(false);
-        //}
-        //else
-        //{
-        //    pageNum++;
-        //}
-        //PreviousButton.SetActive(true);
-        //LoadImages();
+        int maxNumPages = Mathf.CeilToInt(GameManager.GM.CM.GetCreationListSize() / (float)(rows * columns));
+        if (pageNum >= maxNumPages) return;
+        if (pageNum == maxNumPages - 1)
+        {
+            pageNum++;
+            NextButton.SetActive(false);
+        }
+        else
+        {
+            pageNum++;
+        }
+        PreviousButton.SetActive(true);
+        LoadImages();
     }
 
     public void PreviousPage()
