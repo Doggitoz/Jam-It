@@ -1,57 +1,238 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameState StartingState;
+    GameState _currState;
+    PlayingState _playingState;
+    public RecipeManager RM { get; private set; }
+    public CreationsManager CM { get; private set; }
 
-    [SerializeField] GameState currState;
-
-    #region GameManager Singleton
-    static private GameManager gm; //refence GameManager
-    static public GameManager GM { get { return gm; } } //public access to read only gm 
-
-    //Check to make sure only one gm of the GameManager is in the scene
-    void CheckGameManagerIsInScene()
-    {
-
-        //Check if instnace is null
-        if (gm == null)
-        {
-            gm = this; //set gm to this gm of the game object
-            Debug.Log(gm + " Loaded");
-        }
-        else //else if gm is not null a Game Manager must already exsist
-        {
-            Destroy(this.gameObject); //In this case you need to delete this gm
-            Debug.Log("Game Manager exists. Deleting...");
-        }
-    }//end CheckGameManagerIsInScene()
-    #endregion
-
+    //Playing state variables
+    public bool ClickedTable;
+    public bool ProcessingJam;
+    Ingredient[] _selectedIngredients;
+    Creation _currentCreation;
     private void Awake()
     {
-        CheckGameManagerIsInScene();
+        CheckManagerInScene();
     }
 
     private void Start()
     {
-        
+        ChangeState(StartingState);
+        Debug.Log("TODO: Implement door and table logic (including saving to files)");
+        ClickedTable = false; //CHECK THIS IN JSON FILES LATER
     }
+    #region GameManager Singleton
+    static private GameManager gm;
+    static public GameManager GM { get { return gm; } }
 
-    public GameState GetState() { return currState; }
+    void CheckManagerInScene()
+    {
+
+        if (gm == null)
+        {
+            gm = this; 
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    #endregion
+
+    #region GameState Management
+
+    public GameState GetState() { return _currState; }
 
     public void ChangeState(GameState newState)
     {
-        currState = newState;
+        _currState = newState;
 
-        switch(currState)
+        switch(_currState)
         {
             case GameState.Menu:
+                StartMenuState();
+                break;
+            case GameState.Progress:
+                StartProgressState();
+                break;
+            case GameState.Paused:
+                StartPausedState();
+                break;
+            case GameState.Playing:
+                StartPlayingState();
                 break;
             //etc etc
         }
 
+    }
+    #endregion
+
+    #region Menu State
+
+    void StartMenuState()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    void UpdateMenuState()
+    {
+
+    }
+
+    #endregion
+
+    #region Playing State
+
+    void StartPlayingState()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 1)
+            SceneManager.LoadScene(1);
+        ChangePlayingState(PlayingState.Picking);
+    }
+
+    void UpdatePlayingState()
+    {
+
+    }
+
+    public PlayingState GetPlayState() { return _playingState; }
+
+    public void ChangePlayingState(PlayingState newState)
+    {
+        _playingState = newState;
+
+        switch (_playingState)
+        {
+            case PlayingState.Picking:
+                StartPicking();
+                break;
+            case PlayingState.Processing:
+                StartProcessing();
+                break;
+            case PlayingState.Mixing:
+                StartMixing();
+                break;
+            case PlayingState.Heating:
+                StartHeating();
+                break;
+            case PlayingState.Packaging:
+                StartPackaging();
+                break;
+            case PlayingState.Finished:
+                StartFinished();
+                break;
+        }
+
+    }
+
+    public void NextPlayingState()
+    {
+        if (_playingState == PlayingState.Finished)
+        {
+            ChangePlayingState(PlayingState.Picking);
+        }
+        else
+        {
+            ChangePlayingState(_playingState++);
+        }
+    }
+
+    #region Playing Start Methods
+    void StartPicking()
+    {
+        _currentCreation = null; // Reset the crafted creation when entering Picking phase
+
+        //Have logic to check if door is missing or not?
+        SetCamera(0f, 1f);
+    }
+
+    void StartProcessing()
+    {
+        //Probably need other UI's above to handle processing stuff
+
+        //Idea: put on starting spot with ingredient. Give option to either juice or smash. After choosing, play minigame
+        // once minigame is done, check if more ingredients, if so, restart the StartProcessing() state
+
+    }
+
+    void StartMixing()
+    {
+
+    }
+
+    void StartHeating()
+    {
+
+    }
+
+    void StartPackaging()
+    {
+
+    }
+
+    void StartFinished()
+    {
+
+    }
+
+    #endregion
+
+    public void AddIngredient()
+    {
+
+    }
+
+    public  void RemoveIngredient()
+    {
+
+    }
+
+    public Creation GetCurrentCreation()
+    {
+        return _currentCreation;
+    }
+
+    #endregion
+
+    #region Progress State
+
+    void StartProgressState()
+    {
+
+    }
+
+    void UpdateProgressState()
+    {
+
+    }
+
+    #endregion
+
+    #region Paused State
+
+    void StartPausedState()
+    {
+
+    }
+
+    void UpdatePausedState()
+    {
+
+    }
+
+    #endregion
+
+    
+
+    public void SetCamera(float x, float y)
+    {
+        Camera.main.transform.position = new Vector3(x, y, -10f);
     }
 
 }
@@ -60,4 +241,9 @@ public class GameManager : MonoBehaviour
 public enum GameState
 {
     Menu, Paused, Progress, Playing //This might be too many states idrk
+}
+
+public enum PlayingState
+{
+    Picking, Processing, Mixing, Heating, Packaging, Finished
 }

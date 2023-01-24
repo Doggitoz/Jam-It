@@ -15,8 +15,8 @@ public class ProgressUI : MonoBehaviour
     public GameObject JuiceTemplate;
     public GameObject PreviousButton;
     public GameObject NextButton;
-    public CreationsHandler ch;
     public bool isOpen = false;
+    public bool debugDisplay = false;
     int pageNum = 1;
     GameObject[,] displayCatalog;
 
@@ -24,6 +24,7 @@ public class ProgressUI : MonoBehaviour
     void Start()
     {
         displayCatalog = new GameObject[rows, columns];
+        Debug.Log("TODO: Juice icons always being covered?");
     }
 
     void LoadImages()
@@ -45,63 +46,63 @@ public class ProgressUI : MonoBehaviour
         {
             for (int j = 1; j <= columns; j++)
             {
-                Creation data = ch.GetCreationAtIndex((int) (baseIndex + addedIndex));
-                if (data == null) continue;
+                ////Creation data = ch.GetCreationAtIndex((int) (baseIndex + addedIndex));
+                //if (data == null) continue;
 
-                Vector2 location = new Vector2(HorizontalImageOffset * (j - 3), VerticalImageOffset * (3 - i));
-                GameObject newImage;
+                //Vector2 location = new Vector2(HorizontalImageOffset * (j - 3), VerticalImageOffset * (3 - i));
+                //GameObject newImage;
 
-                //Change sprite information
-                if (data.Type == CreationType.Jam)
-                {
-                    newImage = Instantiate(JamTemplate);
-                }
-                else if (data.Type == CreationType.Juice)
-                {
-                    newImage = Instantiate(JuiceTemplate);
-                }
-                else
-                {
-                    Debug.LogError("SOMEHOW THIS GOT TO AN ERROR TYPE IDK MAN");
-                    newImage = Instantiate(JamTemplate);
-                }
+                ////Change sprite information
+                //if (data.Type == CreationType.Jam)
+                //{
+                //    newImage = Instantiate(JamTemplate);
+                //}
+                //else if (data.Type == CreationType.Juice)
+                //{
+                //    newImage = Instantiate(JuiceTemplate);
+                //}
+                //else
+                //{
+                //    Debug.LogError("SOMEHOW THIS GOT TO AN ERROR TYPE IDK MAN");
+                //    newImage = Instantiate(JamTemplate);
+                //}
 
-                //If recipe is empty, disable inside
+                ////If recipe is empty, disable inside
 
 
-                //Set UI element location
-                newImage.transform.SetParent(UIPanel.transform);
-                newImage.GetComponent<RectTransform>().localPosition = location;
-                newImage.GetComponent<RectTransform>().localScale = Vector3.one * ImageScale;
+                ////Set UI element location
+                //newImage.transform.SetParent(UIPanel.transform);
+                //newImage.GetComponent<RectTransform>().localPosition = location;
+                //newImage.GetComponent<RectTransform>().localScale = Vector3.one * ImageScale;
 
-                //LOGIC TO DISPLAY PROPER IMAGE
-                ImageData id = newImage.GetComponent<ImageData>();
-                if (data.TimesMade > 0)
-                {
-                    id.Name = data.Name + " " + data.Type.ToString();
-                }
-                else
-                {
-                    id.Name = data.IsSecret ? "???" : data.Name + " " + data.Type.ToString();
-                }
+                ////LOGIC TO DISPLAY PROPER IMAGE
+                //ImageData id = newImage.GetComponent<ImageData>();
+                //if (data.TimesMade > 0)
+                //{
+                //    id.Name = data.Name + " " + data.Type.ToString();
+                //}
+                //else
+                //{
+                //    id.Name = data.IsSecret ? "???" : data.Name + " " + data.Type.ToString();
+                //}
                 
-                id.Quip = data.TimesMade > 0 ? data.Quip : "";
-                id.Recipe = data.TimesMade > 0 ? data.Recipe : "";
-                id.TimesMade = data.TimesMade;
+                //id.Quip = data.TimesMade > 0 ? data.Quip : "";
+                //id.Recipe = data.TimesMade > 0 ? data.Recipe : "";
+                //id.TimesMade = data.TimesMade;
 
-                //IMAGE COLOR LOGIC
-                newImage.GetComponent<Image>().color = data.Color;
+                ////IMAGE COLOR LOGIC
+                //newImage.GetComponent<Image>().color = data.Color;
 
-                if (data.TimesMade < 1)
-                {
-                    id.EnableCover();
-                }
+                //if (data.TimesMade < 1  && !debugDisplay)
+                //{
+                //    id.EnableCover();
+                //}
 
-                //Update added index
-                addedIndex++;
+                ////Update added index
+                //addedIndex++;
 
-                //Store in array for deletion later
-                displayCatalog[i - 1, j - 1] = newImage;
+                ////Store in array for deletion later
+                //displayCatalog[i - 1, j - 1] = newImage;
             }
         }
     }
@@ -130,19 +131,19 @@ public class ProgressUI : MonoBehaviour
 
     public void NextPage()
     {
-        int maxNumPages = Mathf.CeilToInt(ch.GetCreationListSize() / (float)(rows * columns));
-        if (pageNum >= maxNumPages) return;
-        if (pageNum == maxNumPages - 1)
-        {
-            pageNum++;
-            NextButton.SetActive(false);
-        }
-        else
-        {
-            pageNum++;
-        }
-        PreviousButton.SetActive(true);
-        LoadImages();
+        //int maxNumPages = Mathf.CeilToInt(ch.GetCreationListSize() / (float)(rows * columns));
+        //if (pageNum >= maxNumPages) return;
+        //if (pageNum == maxNumPages - 1)
+        //{
+        //    pageNum++;
+        //    NextButton.SetActive(false);
+        //}
+        //else
+        //{
+        //    pageNum++;
+        //}
+        //PreviousButton.SetActive(true);
+        //LoadImages();
     }
 
     public void PreviousPage()
