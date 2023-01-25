@@ -10,24 +10,44 @@ public class RecipeManager : MonoBehaviour
 
     bool hasSmashedIngredient = false;
     
-
-    void Start()
+    public CreationData RecipeAlgorithm(List<Ingredient> ingredientList)
     {
-        Debug.Log("TODO: Rework algorithm to accomodate empties and jam vs juice");
-        Debug.Log("TODO: Allocate for nothings to be returned");
-        Debug.Log("TODO: Should prioritize table or door");
-    }
-
-    public Creation RecipeAlgorithm(List<Ingredient> ingredientList)
-    {
-        Creation creation;
         subsets = new List<List<Ingredient>>();
-        creation = StartRecipeCheck(ingredientList);
-        return creation;
-    }
 
-    public Creation StartRecipeCheck(List<Ingredient> ingredientList)
-    {
+        foreach (Ingredient ing in ingredientList.ToList())
+        {
+            if (ing == null)
+            {
+                ingredientList.Remove(ing);
+            }
+        }
+
+        //Check if empty
+        if (ingredientList.Count == 0)
+            return GameManager.GM.SaveData.GetCreationByRecipe("Null");
+
+        ingredientList.Sort((x, y) => x.CharacterRepresentation.CompareTo(y.CharacterRepresentation));
+
+        //Check if door
+        foreach (Ingredient ing in ingredientList.ToList())
+        {
+            if (ing.IngredientName == "Table")
+            {
+                GameManager.GM.ClickedTable = true;
+                return GameManager.GM.SaveData.GetCreationByRecipe("Door");
+            }
+        }
+
+        //Check if there is a smashed ingredient
+        foreach (Ingredient ing in ingredientList.ToList())
+        {
+            if (ing.IngredientType == IngredientType.Smashed)
+            {
+                hasSmashedIngredient = true;
+                break;
+            }
+        }
+
         //Creates all subsets into subsets<>
         CreateSubsets(ingredientList, new List<Ingredient>(), 0);
 
@@ -45,8 +65,7 @@ public class RecipeManager : MonoBehaviour
         List<List<Ingredient>> subsetSizeTwo = new List<List<Ingredient>>();
         List<List<Ingredient>> subsetSizeOne = new List<List<Ingredient>>();
 
-
-        //Sort each subset and fill them with empties
+        //Filter all subsets into size lists
         foreach (List<Ingredient> listIng in subsets)
         {
             switch (listIng.Count)
@@ -62,80 +81,42 @@ public class RecipeManager : MonoBehaviour
                     break;
                 default:
                     Debug.LogError("Fatal Error: Somehow a subset was empty or bigger than 3");
+                    Application.Quit();
                     return null;
             }
         }
+        CreationData creation;
+        subsetSizeTwo = subsetSizeTwo.OrderBy(_ => Random.Range(0, 100f)).ToList();
+        subsetSizeOne = subsetSizeOne.OrderBy(_ => Random.Range(0, 100f)).ToList();
 
-        foreach (Ingredient ing in ingredientList)
+        //If i can randomize order of subset size two and one, this works
+        foreach (List<Ingredient> ing in subsetSizeThree)
         {
-            if (ing.IngredientType == IngredientType.Smashed)
-            {
-                hasSmashedIngredient = true;
-                break;
-            }
+            creation = GameManager.GM.SaveData.GetCreationByRecipe(ArrayListToString(ing), hasSmashedIngredient);
+            if (creation != null)
+                return creation;
+        }
+        foreach (List<Ingredient> ing in subsetSizeTwo)
+        {
+            creation = GameManager.GM.SaveData.GetCreationByRecipe(ArrayListToString(ing), hasSmashedIngredient);
+            if (creation != null)
+                return creation;
+        }
+        foreach (List<Ingredient> ing in subsetSizeOne)
+        {
+            creation = GameManager.GM.SaveData.GetCreationByRecipe(ArrayListToString(ing), hasSmashedIngredient);
+            if (creation != null)
+                return creation;
         }
 
-        //EVERYTHING UP TO HERE IS REALLY GOOD AND CLEAN AND SHOULD NOT BE TOUCHED!!!!!!!!!
-        //BELOW.... UHHH....
-
-        //If there is three ingredients, check if it has a valid recipe
-        if (subsetSizeThree.Count > 0)
-        {
-            if (FindValidRecipe(subsetSizeThree[0]) != null)
-            {
-                return FindValidRecipe(subsetSizeThree[0]);
-            }
-        }
-        //Check all valid subsets of two ingredients for valid recipes
-        while (subsetSizeTwo.Count > 0)
-        {
-            int randomIndex = Random.Range(0, subsetSizeTwo.Count);
-            if (FindValidRecipe(subsetSizeTwo[randomIndex]) != null)
-            {
-                return FindValidRecipe(subsetSizeTwo[randomIndex]);
-            }
-            else subsetSizeTwo.RemoveAt(randomIndex);
-        }
-        while (subsetSizeOne.Count > 0)
-        {
-            int randomIndex = Random.Range(0, subsetSizeOne.Count);
-            if (FindValidRecipe(subsetSizeOne[randomIndex]) != null)
-            {
-                return FindValidRecipe(subsetSizeOne[randomIndex]);
-            }
-            else subsetSizeOne.RemoveAt(randomIndex);
-        }
-
-        //If you've gotten here, everything was empty. Handle returning that.
+        Application.Quit();
+        Debug.LogWarning("Somehow it didn't find a creation");
         return null;
     }
-
-    public Creation FindValidRecipe(List<Ingredient> recipe)
-    {
-        foreach (Creation cr in GameManager.GM.CM.GetCreationArray())
-        {
-            if (cr.Recipe == ArrayListToString(recipe))
-            {
-                if (hasSmashedIngredient && cr.Type == CreationType.Jam)
-                {
-                    Debug.Log("Found valid recipe: " + cr.Name + " " + cr.Type.ToString());
-                    return cr;
-                }
-                else if (!hasSmashedIngredient && cr.Type == CreationType.Juice)
-                {
-                    Debug.Log("Found valid recipe: " + cr.Name + " " + cr.Type.ToString());
-                    return cr;
-                }
-            }
-
-        }
-        return null;
-    }
-
     public string ArrayListToString(List<Ingredient> printList)
     {
         string str = "";
-        foreach (Ingredient ing in printList)
+        foreach (Ingredient ing in printList.ToList())
         {
             str += ing.CharacterRepresentation;
         }

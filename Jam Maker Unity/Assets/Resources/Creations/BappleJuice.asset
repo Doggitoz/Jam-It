@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: BappleJuice
   m_EditorClassIdentifier: 
+  Id: 13827480
   Type: 1
   Name: Bapple
   Recipe: AN
   Quip: Surprisingly good with a little bit of a strange after taste.
   IsSecret: 0
   Color: {r: 0.52156866, g: 0.16078432, b: 0.2509804, a: 1}
-  TimesMade: 0
   Index: 15

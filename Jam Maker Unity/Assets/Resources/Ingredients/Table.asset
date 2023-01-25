@@ -15,3 +15,4 @@ MonoBehaviour:
   CharacterRepresentation: T
   IngredientName: Table
   IngredientType: 0
+  Sprite: {fileID: 21300000, guid: 3e2f11a98f8dad944aee794627aea35d, type: 3}

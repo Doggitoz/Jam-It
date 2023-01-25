@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: Dangerous InnovationJuice
   m_EditorClassIdentifier: 
+  Id: 488226147
   Type: 1
   Name: Dangerous Innovation
   Recipe: CN
@@ -19,5 +20,4 @@ MonoBehaviour:
     good."
   IsSecret: 0
   Color: {r: 0.5647059, g: 0.6431373, b: 0.68235296, a: 1}
-  TimesMade: 0
   Index: 12

@@ -15,3 +15,4 @@ MonoBehaviour:
   CharacterRepresentation: S
   IngredientName: Strawberry
   IngredientType: 0
+  Sprite: {fileID: 21300000, guid: 5247285b946b10240a33229a83718003, type: 3}

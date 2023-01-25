@@ -15,3 +15,4 @@ MonoBehaviour:
   CharacterRepresentation: R
   IngredientName: Raspberry
   IngredientType: 0
+  Sprite: {fileID: 21300000, guid: 4f28b485d7de22447b51d3c007d2f2a9, type: 3}

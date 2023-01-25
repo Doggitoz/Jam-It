@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: Not Very BerryJuice
   m_EditorClassIdentifier: 
+  Id: 407426332
   Type: 1
   Name: Not Very Berry
   Recipe: AGP
-  Quip: Despite the name-it is berry good!
+  Quip: Despite the name,it is berry good!
   IsSecret: 0
   Color: {r: 0.14509805, g: 0.2784314, b: 0.5254902, a: 1}
-  TimesMade: 0
   Index: 16

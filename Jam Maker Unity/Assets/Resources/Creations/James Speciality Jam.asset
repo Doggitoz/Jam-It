@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: James Speciality Jam
   m_EditorClassIdentifier: 
+  Id: 350530555
   Type: 0
   Name: 'James Speciality '
   Recipe: PPP
-  Quip: 'Now this peach jam will be a huge success! Hopefully there are no insects
-    in there. '
+  Quip: Now this peach jam will be a huge success! Hopefully there are no insects
+    in there.
   IsSecret: 0
   Color: {r: 1, g: 0.8980392, b: 0.7058824, a: 1}
-  TimesMade: 0
   Index: 25

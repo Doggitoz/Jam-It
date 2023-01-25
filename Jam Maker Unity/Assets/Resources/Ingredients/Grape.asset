@@ -15,3 +15,4 @@ MonoBehaviour:
   CharacterRepresentation: G
   IngredientName: Grape
   IngredientType: 0
+  Sprite: {fileID: 21300000, guid: a50c0003dff78c040963e670e32f20aa, type: 3}

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: Southern DelightJam
   m_EditorClassIdentifier: 
+  Id: 8057543
   Type: 0
   Name: Southern Delight
   Recipe: PR
-  Quip: '"Peach bacon might be good-but bacon mixed with peach is awful."'
+  Quip: Peach bacon might be good,but bacon mixed with peach is awful.
   IsSecret: 0
   Color: {r: 0.9254902, g: 0.6431373, b: 0.07450981, a: 1}
-  TimesMade: 0
   Index: 22

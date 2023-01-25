@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,23 +11,27 @@ public class GameManager : MonoBehaviour
     GameState _currState;
     PlayingState _playingState;
     public RecipeManager RM;
-    public CreationsManager CM;
+    public SaveData SaveData;
 
     //Playing state variables
     public bool ClickedTable;
     public bool ProcessingJam;
-    List<Ingredient> ingredientList = new List<Ingredient>(3);
-    Creation _currentCreation;
+    [SerializeField] Ingredient[] ingredientList;
+    [SerializeField] CreationData _currentCreation;
+    public UnityEvent UpdateIngredientSelection { get; private set; }
     private void Awake()
     {
         CheckManagerInScene();
+        if (UpdateIngredientSelection == null)
+        {
+            UpdateIngredientSelection = new UnityEvent();
+        }
     }
 
     private void Start()
     {
+        ClickedTable = false;
         ChangeState(StartingState);
-        Debug.Log("TODO: Implement door and table logic (including saving to files)");
-        ClickedTable = false; //CHECK THIS IN JSON FILES LATER
     }
     #region GameManager Singleton
     static private GameManager gm;
@@ -106,7 +112,7 @@ public class GameManager : MonoBehaviour
     public void ChangePlayingState(PlayingState newState)
     {
         _playingState = newState;
-
+        Debug.Log("New state: " + newState);
         switch (_playingState)
         {
             case PlayingState.Picking:
@@ -121,9 +127,6 @@ public class GameManager : MonoBehaviour
             case PlayingState.Heating:
                 StartHeating();
                 break;
-            case PlayingState.Packaging:
-                StartPackaging();
-                break;
             case PlayingState.Finished:
                 StartFinished();
                 break;
@@ -133,13 +136,14 @@ public class GameManager : MonoBehaviour
 
     public void NextPlayingState()
     {
+        if (_currState != GameState.Playing) return;
         if (_playingState == PlayingState.Finished)
         {
             ChangePlayingState(PlayingState.Picking);
         }
         else
         {
-            ChangePlayingState(_playingState++);
+            ChangePlayingState(_playingState + 1);
         }
     }
 
@@ -147,10 +151,17 @@ public class GameManager : MonoBehaviour
     void StartPicking()
     {
         _currentCreation = null; // Reset the crafted creation when entering Picking phase
-        ingredientList.Clear();
+        ingredientList = new Ingredient[3]; //Clear array
+        UpdateIngredientSelection.Invoke();
 
-        //Have logic to check if door is missing or not?
-        SetCamera(0f, 1f);
+        if (ClickedTable)
+        {
+            SetCamera(0f, 11f);
+        }
+        else
+        {
+            SetCamera(0f, 0f);
+        }
     }
 
     void StartProcessing()
@@ -159,28 +170,30 @@ public class GameManager : MonoBehaviour
 
         //Idea: put on starting spot with ingredient. Give option to either juice or smash. After choosing, play minigame
         // once minigame is done, check if more ingredients, if so, restart the StartProcessing() state
-
+        SetCamera(22f, 0f);
     }
 
     void StartMixing()
     {
-        _currentCreation = RM.RecipeAlgorithm(ingredientList);
-        SetCamera(46f, 1f);
+        _currentCreation = RM.RecipeAlgorithm(ingredientList.ToList());
+        SetCamera(44f, 0f);
     }
 
     void StartHeating()
     {
-        SetCamera(69f, 1f);
-    }
-
-    void StartPackaging()
-    {
-        SetCamera(92f, 1f);
+        SetCamera(66f, 0f);
     }
 
     void StartFinished()
     {
-        SetCamera(115f, 1f);
+        SetCamera(88f, 0f);
+        if (_currentCreation != null) _currentCreation.TimesMade++;
+        SaveData.SaveToJson();
+    }
+
+    void AbortRecipe()
+    {
+        ChangePlayingState(PlayingState.Picking);
     }
 
     #endregion
@@ -189,23 +202,36 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            if (ingredientList[i] != null)
+            if (ingredientList[i] == null)
             {
-                ingredientList.Insert(i, ing);
-                Debug.Log("Inserted " + ing.IngredientName + " to slot " + i);
+                ingredientList[i] = ing;
+                UpdateIngredientSelection.Invoke();
+                return;
             }
         }
     }
 
-    public  void RemoveIngredient(int index)
+    public void RemoveIngredient(int index)
     {
-        ingredientList.RemoveAt(index);
+        ingredientList[index] = null; //this might cause a memory leak. :D
+        UpdateIngredientSelection.Invoke();
     }
 
-    public Creation GetCurrentCreation()
+    public Ingredient GetIngredientAtIndex(int index)
+    {
+        return ingredientList[index];
+    }
+    public void ProcessIngredient(IngredientType type, int index)
+    {
+        ingredientList[index].IngredientType = type;
+    }
+
+    public CreationData GetCurrentCreation()
     {
         return _currentCreation;
     }
+
+    
 
     #endregion
 
@@ -241,7 +267,7 @@ public class GameManager : MonoBehaviour
 
     public void SetCamera(float x, float y)
     {
-        Camera.main.transform.position = new Vector3(x, y, -10f);
+        Camera.main.transform.position = new Vector3(x, y, Camera.main.transform.position.z);
     }
 
 }
@@ -254,5 +280,5 @@ public enum GameState
 
 public enum PlayingState
 {
-    Picking, Processing, Mixing, Heating, Packaging, Finished
+    Picking, Processing, Mixing, Heating, Finished
 }

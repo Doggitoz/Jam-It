@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: Out of This World AppleJam
   m_EditorClassIdentifier: 
+  Id: 128790507
   Type: 0
   Name: Out of This World Apple
   Recipe: AS
-  Quip: '"You feel among the cosmos. You are one with the stars-then you come crashing
-    back to reality when you realize it is just an average jam. "'
+  Quip: You feel among the cosmos. You are one with the stars,then you come crashing
+    back to reality when you realize it is just an average jam."
   IsSecret: 0
   Color: {r: 0.40392157, g: 0.12156863, b: 0.21960784, a: 1}
-  TimesMade: 0
   Index: 24

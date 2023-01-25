@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: "Vampire\u2019s SnackJuice"
   m_EditorClassIdentifier: 
+  Id: 383943862
   Type: 1
   Name: "Vampire\u2019s Snack"
   Recipe: ARS
   Quip: Dracula's favorite!
   IsSecret: 0
   Color: {r: 0.4, g: 0, b: 0, a: 1}
-  TimesMade: 0
   Index: 11

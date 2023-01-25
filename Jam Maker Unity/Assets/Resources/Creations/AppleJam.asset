@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: AppleJam
   m_EditorClassIdentifier: 
+  Id: 803456252
   Type: 0
   Name: Apple
   Recipe: A
   Quip: 
   IsSecret: 0
   Color: {r: 1, g: 1, b: 1, a: 1}
-  TimesMade: 0
   Index: 1

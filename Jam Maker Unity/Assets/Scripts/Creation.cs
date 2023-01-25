@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Creation", menuName = "Asset/Creation")]
 public class Creation : ScriptableObject
 {
+    public int Id;
+
     public CreationType Type;
     public string Name;
     public string Recipe;
@@ -12,7 +14,6 @@ public class Creation : ScriptableObject
     public bool IsSecret;
     public Color Color;
 
-    public int TimesMade; //If times made > 0, enable color, enable quip, enable recipe
     public int Index;
 }
 

@@ -15,3 +15,4 @@ MonoBehaviour:
   CharacterRepresentation: C
   IngredientName: Controller
   IngredientType: 0
+  Sprite: {fileID: 21300000, guid: 006d80ff7884f7448a9ccc2f5705e2e5, type: 3}

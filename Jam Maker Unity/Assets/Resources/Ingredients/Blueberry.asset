@@ -15,3 +15,4 @@ MonoBehaviour:
   CharacterRepresentation: B
   IngredientName: Blueberry
   IngredientType: 0
+  Sprite: {fileID: 21300000, guid: 998c852eb4c985147a5f088b40c117a5, type: 3}

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: PeAppleJuice
   m_EditorClassIdentifier: 
+  Id: 39916805
   Type: 1
   Name: PeApple
   Recipe: AP
   Quip: A nice juice. Not too scary. Sweet to the taste.
   IsSecret: 0
   Color: {r: 0.7921569, g: 0.15294118, b: 0.30980393, a: 1}
-  TimesMade: 0
   Index: 14

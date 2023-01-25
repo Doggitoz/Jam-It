@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: VineJuice
   m_EditorClassIdentifier: 
+  Id: 1228431094
   Type: 1
   Name: Vine
   Recipe: GR
   Quip: This would look great on a discontinued social media app.
   IsSecret: 0
   Color: {r: 0.5058824, g: 0.78039217, b: 0.5176471, a: 1}
-  TimesMade: 0
   Index: 13

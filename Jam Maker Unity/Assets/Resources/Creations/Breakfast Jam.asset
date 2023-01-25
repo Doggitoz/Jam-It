@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: Breakfast Jam
   m_EditorClassIdentifier: 
+  Id: 329398
   Type: 0
   Name: 'Breakfast '
   Recipe: BN
-  Quip: '"These might go great separate-but mixed together-they are even better"'
+  Quip: These might go great separate,but mixed together,they are even better
   IsSecret: 0
   Color: {r: 0.16078432, g: 0.047058824, b: 0.34901962, a: 1}
-  TimesMade: 0
   Index: 20

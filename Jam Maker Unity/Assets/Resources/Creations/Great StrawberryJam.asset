@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: Great StrawberryJam
   m_EditorClassIdentifier: 
+  Id: 16412606
   Type: 0
   Name: Great Strawberry
   Recipe: GS
   Quip: Now that greeeeeeeat!
   IsSecret: 0
   Color: {r: 0.59607846, g: 0.21176471, b: 0.3882353, a: 1}
-  TimesMade: 0
   Index: 27

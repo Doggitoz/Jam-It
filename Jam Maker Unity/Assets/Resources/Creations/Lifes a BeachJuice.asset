@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: Lifes a BeachJuice
   m_EditorClassIdentifier: 
+  Id: 1738242757
   Type: 1
   Name: Lifes a Beach
   Recipe: BP
   Quip: Like a cool breeze on a nice summer day
   IsSecret: 0
   Color: {r: 0.6117647, g: 0.6156863, b: 0.22352941, a: 1}
-  TimesMade: 0
   Index: 18

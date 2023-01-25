@@ -19,19 +19,30 @@ public class CSVtoSO : MonoBehaviour
         int index = 1;
         foreach (string line in allLines)
         {
-            // Type(Jam, Juice), Name, Recipe, Quip, Secret(Yes,No), HexColorCode
-
             Debug.Log(line);
             string[] split = line.Split(',');
 
             Creation creation = ScriptableObject.CreateInstance<Creation>();
+            string IDString = TypeFromString(split[0]) + CheckNullName(split[1]);
+            int h = 0;
+            for (int i = 0; i < IDString.Length; i++)
+            {
+                h = 31 * h + IDString[i];
 
-            //Logic to check if a creation already has name, if so then just update?
 
+                if (h > 1000000000)
+                {
+                    h = Mathf.FloorToInt(h / 4000f);
+                }
+
+            }
+            h = Mathf.Abs(h);
+
+            creation.Id = h;
             creation.Type = TypeFromString(split[0]);
             creation.Name = CheckNullName(split[1]);
             creation.Recipe = CheckNullRecipe(split[2]);
-            creation.Quip = CheckNullQuip(split[3]);
+            creation.Quip = CheckNullQuip(split[3].Replace("-", ","));
             creation.IsSecret = StringToBool(split[4]);
             creation.Color = HexToRGB(split[5]);
             creation.Index = index;

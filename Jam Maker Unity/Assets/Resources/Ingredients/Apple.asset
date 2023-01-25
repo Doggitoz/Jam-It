@@ -15,3 +15,4 @@ MonoBehaviour:
   CharacterRepresentation: A
   IngredientName: Apple
   IngredientType: 0
+  Sprite: {fileID: 21300000, guid: 9b27d08667e417c4187d8dbf6adeab6c, type: 3}

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: Literally NothingJam
   m_EditorClassIdentifier: 
+  Id: 423017454
   Type: 0
   Name: Literally Nothing
-  Recipe: ' '
+  Recipe: Null
   Quip: I'm not exactly sure what you expected...?
   IsSecret: 1
   Color: {r: 1, g: 1, b: 1, a: 1}
-  TimesMade: 0
   Index: 29

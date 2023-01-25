@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: Peachy GrapeJam
   m_EditorClassIdentifier: 
+  Id: 590484739
   Type: 0
   Name: Peachy Grape
   Recipe: GP
-  Quip: '"Taste like getting punched in the stomach-so if you are into that-a great
-    jam for you."'
+  Quip: Taste like getting punched in the stomach,so if you are into that,a great
+    jam for you.
   IsSecret: 0
   Color: {r: 0.30588236, g: 0.07058824, b: 0.33333334, a: 1}
-  TimesMade: 0
   Index: 28

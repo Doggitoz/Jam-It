@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ingredient
+  - NextPage
   layers:
   - Default
   - TransparentFX
@@ -40,4 +42,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Mixing Bowl
+    uniqueID: 2375926463
+    locked: 0
+  - name: Dial Game
+    uniqueID: 1827783827
+    locked: 0
+  - name: Ingredient Selection
+    uniqueID: 3810239503
+    locked: 0
+  - name: Priority
+    uniqueID: 2945102589
     locked: 0

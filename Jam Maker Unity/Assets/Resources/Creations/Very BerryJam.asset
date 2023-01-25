@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: Very BerryJam
   m_EditorClassIdentifier: 
+  Id: 644762857
   Type: 0
   Name: Very Berry
   Recipe: BRS
-  Quip: 'Now that is a berry good jam.  '
+  Quip: Now that is a berry good jam.
   IsSecret: 0
   Color: {r: 0.53333336, g: 0.078431375, b: 0.78039217, a: 1}
-  TimesMade: 0
   Index: 19

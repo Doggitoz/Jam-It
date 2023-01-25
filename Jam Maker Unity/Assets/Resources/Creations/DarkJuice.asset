@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312a305fd171f1049a180b39aeea4a05, type: 3}
   m_Name: DarkJuice
   m_EditorClassIdentifier: 
+  Id: 1228974890
   Type: 1
   Name: Dark
   Recipe: BCG
@@ -19,5 +20,4 @@ MonoBehaviour:
     drinking as it might cause you to converge on yourself.
   IsSecret: 0
   Color: {r: 0, g: 0, b: 0, a: 1}
-  TimesMade: 0
   Index: 10

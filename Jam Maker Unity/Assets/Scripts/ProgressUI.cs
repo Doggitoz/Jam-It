@@ -40,13 +40,13 @@ public class ProgressUI : MonoBehaviour
             }
         }
 
-                float baseIndex = (pageNum - 1) * (rows * columns);
+        float baseIndex = (pageNum - 1) * (rows * columns);
         float addedIndex = 0;
         for (int i = 1; i <= rows; i++)
         {
             for (int j = 1; j <= columns; j++)
             {
-                Creation data = GameManager.GM.CM.GetCreationAtIndex((int) (baseIndex + addedIndex));
+                CreationData data = GameManager.GM.SaveData.GetCreationAtIndex((int)(baseIndex + addedIndex));
                 if (data == null) continue;
 
                 Vector2 location = new Vector2(HorizontalImageOffset * (j - 3), VerticalImageOffset * (3 - i));
@@ -131,7 +131,7 @@ public class ProgressUI : MonoBehaviour
 
     public void NextPage()
     {
-        int maxNumPages = Mathf.CeilToInt(GameManager.GM.CM.GetCreationListSize() / (float)(rows * columns));
+        int maxNumPages = Mathf.CeilToInt(GameManager.GM.SaveData.GetCreationListCount() / (float)(rows * columns));
         if (pageNum >= maxNumPages) return;
         if (pageNum == maxNumPages - 1)
         {

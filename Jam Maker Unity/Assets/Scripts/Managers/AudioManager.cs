@@ -114,24 +114,28 @@ public class AudioManager : MonoBehaviour
     public void SetMasterVolume(float volume)
     {
         MasterVolume = volume;
+        GameManager.GM.SaveData.Data.MasterVolume = volume;
         UpdateAudioSourceVolumes();
     }
 
     public void SetMusicVolume(float volume)
     {
         MusicVolume = volume;
+        GameManager.GM.SaveData.Data.MusicVolume = volume;
         UpdateAudioSourceVolumes();
     }
 
     public void SetUIVolume(float volume)
     {
         UIVolume = volume;
+        GameManager.GM.SaveData.Data.UIVolume = volume;
         UpdateAudioSourceVolumes();
     }
 
-    public void SetEffctsVolume(float volume)
+    public void SetEffectsVolume(float volume)
     {
         EffectVolume = volume;
+        GameManager.GM.SaveData.Data.EffectsVolume = volume;
         UpdateAudioSourceVolumes();
     }
     #endregion

@@ -7,7 +7,6 @@ public class InputHandler : MonoBehaviour
     public ProgressUI progressUI;
     public PauseMenu pauseUI;
 
-
     private void Update()
     {
         //Pause menu UI
@@ -37,5 +36,9 @@ public class InputHandler : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            GameManager.GM.NextPlayingState();
+        }
     }
 }
