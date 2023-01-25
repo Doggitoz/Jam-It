@@ -9,6 +9,7 @@ public class Ingredient : ScriptableObject
     public string IngredientName;
     public IngredientType IngredientType = IngredientType.Unprocessed;
     public Sprite Sprite;
+    public Color color;
 }
 
 public enum IngredientType

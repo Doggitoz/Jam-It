@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,6 +12,7 @@ public class RecipeManager : MonoBehaviour
     
     public CreationData RecipeAlgorithm(List<Ingredient> ingredientList)
     {
+        hasSmashedIngredient = false;
         subsets = new List<List<Ingredient>>();
 
         foreach (Ingredient ing in ingredientList.ToList())

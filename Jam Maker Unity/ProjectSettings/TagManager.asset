@@ -52,6 +52,15 @@ TagManager:
   - name: Ingredient Selection
     uniqueID: 3810239503
     locked: 0
+  - name: Heating
+    uniqueID: 1001813459
+    locked: 0
+  - name: Finalize
+    uniqueID: 1187114565
+    locked: 0
   - name: Priority
     uniqueID: 2945102589
+    locked: 0
+  - name: JamUI
+    uniqueID: 1278249637
     locked: 0

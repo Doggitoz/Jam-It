@@ -5,6 +5,7 @@ using UnityEngine;
 public class AddIngredient : MonoBehaviour
 {
     [SerializeField] Ingredient ingredient;
+    [SerializeField] AudioClip interact;
     public void AddIngredientToList()
     {
         Ingredient clone = Instantiate(ingredient);
@@ -13,6 +14,7 @@ public class AddIngredient : MonoBehaviour
 
     private void OnMouseDown()
     {
+        AudioManager.AM.PlayEffect(interact);
         AddIngredientToList();
     }
 

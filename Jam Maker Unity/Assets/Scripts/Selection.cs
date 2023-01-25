@@ -6,6 +6,7 @@ public class Selection : MonoBehaviour
 {
     public int index;
     SpriteRenderer spriteRenderer;
+    [SerializeField] AudioClip interact;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class Selection : MonoBehaviour
     {
         if (spriteRenderer != null)
         {
+            AudioManager.AM.PlayEffect(interact);
             GameManager.GM.RemoveIngredient(index);
         }
     }

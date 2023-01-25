@@ -14,17 +14,31 @@ public class GameManager : MonoBehaviour
     public SaveData SaveData;
 
     //Playing state variables
+    public bool paused = false;
     public bool ClickedTable;
     public bool ProcessingJam;
+    public bool CanMoveOn;
+    private Ingredient selectedIngredient;
     [SerializeField] Ingredient[] ingredientList;
     [SerializeField] CreationData _currentCreation;
     public UnityEvent UpdateIngredientSelection { get; private set; }
+    public UnityEvent UpdateCreationMade { get; private set; }
+
+    public UnityEvent PlayingStateChangeBroadcast { get; private set; }
     private void Awake()
     {
         CheckManagerInScene();
         if (UpdateIngredientSelection == null)
         {
             UpdateIngredientSelection = new UnityEvent();
+        }
+        if (UpdateCreationMade == null)
+        {
+            UpdateCreationMade = new UnityEvent();
+        }
+        if (PlayingStateChangeBroadcast== null)
+        {
+            PlayingStateChangeBroadcast = new UnityEvent();
         }
     }
 
@@ -63,12 +77,6 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Menu:
                 StartMenuState();
-                break;
-            case GameState.Progress:
-                StartProgressState();
-                break;
-            case GameState.Paused:
-                StartPausedState();
                 break;
             case GameState.Playing:
                 StartPlayingState();
@@ -111,8 +119,8 @@ public class GameManager : MonoBehaviour
 
     public void ChangePlayingState(PlayingState newState)
     {
+        CanMoveOn = false;
         _playingState = newState;
-        Debug.Log("New state: " + newState);
         switch (_playingState)
         {
             case PlayingState.Picking:
@@ -131,12 +139,14 @@ public class GameManager : MonoBehaviour
                 StartFinished();
                 break;
         }
-
+        PlayingStateChangeBroadcast.Invoke();
     }
 
     public void NextPlayingState()
     {
+        if (!CanMoveOn) return;
         if (_currState != GameState.Playing) return;
+        CanMoveOn = false;
         if (_playingState == PlayingState.Finished)
         {
             ChangePlayingState(PlayingState.Picking);
@@ -162,36 +172,45 @@ public class GameManager : MonoBehaviour
         {
             SetCamera(0f, 0f);
         }
+        CanMoveOn = true;
     }
 
     void StartProcessing()
     {
-        //Probably need other UI's above to handle processing stuff
-
-        //Idea: put on starting spot with ingredient. Give option to either juice or smash. After choosing, play minigame
-        // once minigame is done, check if more ingredients, if so, restart the StartProcessing() state
         SetCamera(22f, 0f);
+        //Edge case for crafting nothing
+        if (ingredientList[0] == null && ingredientList[1] == null && ingredientList[2] == null)
+        {
+            CanMoveOn = true;
+        }
     }
 
     void StartMixing()
     {
+        CanMoveOn = true;
         _currentCreation = RM.RecipeAlgorithm(ingredientList.ToList());
+        if (_currentCreation != null)
+        {
+            UpdateCreationMade.Invoke();
+        }
         SetCamera(44f, 0f);
     }
 
     void StartHeating()
     {
+        CanMoveOn = true;
         SetCamera(66f, 0f);
     }
 
     void StartFinished()
     {
         SetCamera(88f, 0f);
+        Debug.Log(_currentCreation.Name);
         if (_currentCreation != null) _currentCreation.TimesMade++;
         SaveData.SaveToJson();
     }
 
-    void AbortRecipe()
+    public void AbortRecipe()
     {
         ChangePlayingState(PlayingState.Picking);
     }
@@ -224,6 +243,17 @@ public class GameManager : MonoBehaviour
     public void ProcessIngredient(IngredientType type, int index)
     {
         ingredientList[index].IngredientType = type;
+        selectedIngredient = ingredientList[index];
+
+        foreach (Ingredient ing in ingredientList)
+        {
+            if (ing == null) continue;
+            if (ing.IngredientType == IngredientType.Unprocessed)
+            {
+                return;
+            }
+        }
+        CanMoveOn = true;
     }
 
     public CreationData GetCurrentCreation()
@@ -231,39 +261,12 @@ public class GameManager : MonoBehaviour
         return _currentCreation;
     }
 
-    
-
-    #endregion
-
-    #region Progress State
-
-    void StartProgressState()
+    public void EnableMoveOn()
     {
-
-    }
-
-    void UpdateProgressState()
-    {
-
+        CanMoveOn = true;
     }
 
     #endregion
-
-    #region Paused State
-
-    void StartPausedState()
-    {
-
-    }
-
-    void UpdatePausedState()
-    {
-
-    }
-
-    #endregion
-
-    
 
     public void SetCamera(float x, float y)
     {
@@ -275,7 +278,7 @@ public class GameManager : MonoBehaviour
 [System.Serializable]
 public enum GameState
 {
-    Menu, Paused, Progress, Playing //This might be too many states idrk
+    Menu, Playing //This might be too many states idrk
 }
 
 public enum PlayingState

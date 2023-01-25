@@ -15,6 +15,7 @@ public class ProgressUI : MonoBehaviour
     public GameObject JuiceTemplate;
     public GameObject PreviousButton;
     public GameObject NextButton;
+    public GameObject MouseHoverUI;
     public bool isOpen = false;
     public bool debugDisplay = false;
     int pageNum = 1;
@@ -24,7 +25,6 @@ public class ProgressUI : MonoBehaviour
     void Start()
     {
         displayCatalog = new GameObject[rows, columns];
-        Debug.Log("TODO: Juice icons always being covered?");
     }
 
     void LoadImages()
@@ -72,11 +72,11 @@ public class ProgressUI : MonoBehaviour
 
                 //Set UI element location
                 newImage.transform.SetParent(UIPanel.transform);
-                newImage.GetComponent<RectTransform>().localPosition = location;
-                newImage.GetComponent<RectTransform>().localScale = Vector3.one * ImageScale;
+                newImage.transform.localPosition = location;
+                newImage.transform.localScale = Vector3.one * ImageScale;
 
                 //LOGIC TO DISPLAY PROPER IMAGE
-                ImageData id = newImage.GetComponent<ImageData>();
+                ImageData id = newImage.GetComponentInChildren<ImageData>();
                 if (data.TimesMade > 0)
                 {
                     id.Name = data.Name + " " + data.Type.ToString();
@@ -91,7 +91,21 @@ public class ProgressUI : MonoBehaviour
                 id.TimesMade = data.TimesMade;
 
                 //IMAGE COLOR LOGIC
-                newImage.GetComponent<Image>().color = data.Color;
+                if (data.Name == "Literally Nothing")
+                {
+                    id.RemoveSubstance();
+                }
+                else
+                {
+                    if (data.Color == null)
+                    {
+                        id.SetColor(Color.white);
+                    }
+                    else
+                    {
+                        id.SetColor(data.Color);
+                    }
+                }
 
                 if (data.TimesMade < 1 && !debugDisplay)
                 {
@@ -110,12 +124,12 @@ public class ProgressUI : MonoBehaviour
     public void OpenUI()
     {
         if (GameManager.GM.GetState() == GameState.Menu) return;
-        if (GameManager.GM.GetState() == GameState.Paused) return;
-        GameManager.GM.ChangeState(GameState.Progress);
+        if (GameManager.GM.paused) return;
         isOpen = true;
         UIPanel.SetActive(true);
         PreviousButton.SetActive(false);
         NextButton.SetActive(true);
+        MouseHoverUI.SetActive(true);
         pageNum = 1;
         LoadImages();
     }
@@ -123,10 +137,9 @@ public class ProgressUI : MonoBehaviour
     public void CloseUI()
     {
         if (GameManager.GM.GetState() == GameState.Menu) return;
-        if (GameManager.GM.GetState() == GameState.Paused) return;
-        GameManager.GM.ChangeState(GameState.Playing);
         isOpen = false;
         UIPanel.SetActive(false);
+        MouseHoverUI.SetActive(false);
     }
 
     public void NextPage()

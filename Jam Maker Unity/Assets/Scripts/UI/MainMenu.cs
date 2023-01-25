@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     public GameObject TitleScreen;
     public GameObject OptionsScreen;
     public GameObject CreditsScreen;
+    public GameObject WarningScreen;
     public Slider MasterSlider;
     public Slider MusicSlider;
     public Slider EffectsSlider;
@@ -89,13 +90,21 @@ public class MainMenu : MonoBehaviour
 
     public void ResetDataButton()
     {
-        GameManager.GM.SaveData.ClearData();
+        ClickSound();
+        WarningScreen.SetActive(true);
     }
 
-    public void TestButton()
+    public void AcceptResetData()
     {
-        CreationData test = GameManager.GM.GetCurrentCreation();
-        int index = GameManager.GM.SaveData.Data.CreationData.IndexOf(test);
-        GameManager.GM.SaveData.Data.CreationData[index].TimesMade++;
+        ClickSound();
+        GameManager.GM.SaveData.ClearData();
+        Debug.Log("Reset data...");
+        WarningScreen.SetActive(false);
+    }
+
+    public void CancelResetData()
+    {
+        ClickSound();
+        WarningScreen.SetActive(false);
     }
 }

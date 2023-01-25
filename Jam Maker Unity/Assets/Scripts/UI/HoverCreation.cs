@@ -20,14 +20,11 @@ public class HoverCreation : MonoBehaviour
     {
         Debug.Log("TODO: Change text recipe to image recipe");
         Debug.Log("TODO: Scale panel with element size");
-        Debug.Log("TODO: This stopped working when I added in layers to the images for colors");
         UILayer = LayerMask.NameToLayer("UI");
-        if (GameManager.GM.GetState() != GameState.Progress) DisableHoverUI();
     }
  
     private void Update()
     {
-        if (GameManager.GM.GetState() != GameState.Progress) return;
         IsPointerOverImageElement();
 
         //put hover UI above or below based on mouse position
@@ -72,6 +69,7 @@ public class HoverCreation : MonoBehaviour
             {
                 if (curRaysastResult.gameObject.GetComponent<ImageData>() != null)
                 {
+                    Debug.Log(curRaysastResult.gameObject.name);
                     UpdateUIData(curRaysastResult.gameObject.GetComponent<ImageData>());
                     EnableHoverUI();
                     return true;
