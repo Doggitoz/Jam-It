@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public UnityEvent UpdateCreationMade { get; private set; }
 
     public UnityEvent PlayingStateChangeBroadcast { get; private set; }
+    public UnityEvent JuicingIngredient { get; private set; }
     private void Awake()
     {
         CheckManagerInScene();
@@ -39,6 +40,10 @@ public class GameManager : MonoBehaviour
         if (PlayingStateChangeBroadcast== null)
         {
             PlayingStateChangeBroadcast = new UnityEvent();
+        }
+        if (JuicingIngredient == null)
+        {
+            JuicingIngredient = new UnityEvent();
         }
     }
 
@@ -254,6 +259,15 @@ public class GameManager : MonoBehaviour
             }
         }
         CanMoveOn = true;
+        if (type == IngredientType.Smashed)
+        {
+            SetCamera(22f, 22f);
+        }
+        else if (type == IngredientType.Juiced)
+        {
+            SetCamera(22f, 44f);
+            JuicingIngredient.Invoke();
+        }
     }
 
     public CreationData GetCurrentCreation()
@@ -270,6 +284,7 @@ public class GameManager : MonoBehaviour
 
     public void SetCamera(float x, float y)
     {
+        Debug.Log("Moving to " + x + " " + y);
         Camera.main.transform.position = new Vector3(x, y, Camera.main.transform.position.z);
     }
 

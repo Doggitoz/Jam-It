@@ -46,13 +46,5 @@ public class InputHandler : MonoBehaviour
                 progressUI.OpenUI();
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (GameManager.GM.GetState() == GameState.Menu) return;
-            if (GameManager.GM.paused) return;
-            GameManager.GM.EnableMoveOn();
-            GameManager.GM.NextPlayingState();
-        }
     }
 }

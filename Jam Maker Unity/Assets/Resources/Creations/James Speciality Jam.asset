@@ -16,8 +16,8 @@ MonoBehaviour:
   Type: 0
   Name: 'James Speciality '
   Recipe: PPP
-  Quip: Now this peach jam will be a huge success! Hopefully there are no insects
-    in there.
+  Quip: 'Now this peach jam will be a huge success! Hopefully there are no insects
+    in there. '
   IsSecret: 0
   Color: {r: 1, g: 0.8980392, b: 0.7058824, a: 1}
-  Index: 25
+  Index: 27

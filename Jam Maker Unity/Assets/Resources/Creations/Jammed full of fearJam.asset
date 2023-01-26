@@ -16,7 +16,7 @@ MonoBehaviour:
   Type: 0
   Name: Jammed full of fear
   Recipe: CR
-  Quip: ' I am scared of why you thought this was a good idea. Please do not make
+  Quip: 'I am scared of why you thought this was a good idea. Please do not make
     this again else I am kicking you out. '
   IsSecret: 0
   Color: {r: 0.35686275, g: 0.35686275, b: 0.03529412, a: 1}

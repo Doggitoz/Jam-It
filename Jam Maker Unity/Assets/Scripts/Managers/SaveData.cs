@@ -97,12 +97,15 @@ public class SaveData : MonoBehaviour
 
     public CreationData GetCreationByRecipe(string recipe, bool hasSmashedIngredient = false)
     {
+        CreationData fruitJuice = null;
         foreach (CreationData cr in GetCreationList())
         {
+            if (cr.Recipe == "Juice") fruitJuice = cr;
             if (cr.Recipe == recipe)
             {
                 if (recipe == "Null") return cr;
                 if (recipe == "Door") return cr;
+                if (recipe == "Table") return cr;
                 if (hasSmashedIngredient && cr.Type == CreationType.Jam)
                 {
                     Debug.Log("Selected valid recipe: " + cr.Name + " " + cr.Type.ToString());
@@ -114,6 +117,10 @@ public class SaveData : MonoBehaviour
                     return cr;
                 }
             }
+        }
+        if (!hasSmashedIngredient)
+        {
+            return fruitJuice;
         }
         Debug.Log("No recipe found");
         return null;

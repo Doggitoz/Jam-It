@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class DialScript : MonoBehaviour
 {
-    [Range(0, 1)] public float SpinSpeed = 1f;
-    public Animator anim;
+    [Range(0, 1)] public float SpinSpeed = .75f;
+    public Animator dialAnim;
+    public SmashAudio sa;
+    public AudioClip success;
     TurningDirection turningDirection = TurningDirection.Left;
     float Location;
+    float timer = 0f;
 
 
     // Start is called before the first frame update
@@ -19,6 +22,9 @@ public class DialScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
+        if (timer < 0.5f) return;
+        if (GameManager.GM.GetPlayState() != PlayingState.Processing) return;
         if (turningDirection == TurningDirection.Left)
         {
             Location -= Time.deltaTime * SpinSpeed;
@@ -35,7 +41,18 @@ public class DialScript : MonoBehaviour
                 turningDirection = TurningDirection.Left;
             }
         }
-        anim.SetFloat("Location", Location);
+        dialAnim.SetFloat("Location", Location);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            timer = 0f;
+            if (Location > 0.47 && Location < 0.53)
+            {
+                AudioManager.AM.PlayEffect(success);
+                sa.StartSmash();
+            }
+        }
+
     }
 
 

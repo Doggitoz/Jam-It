@@ -49,6 +49,9 @@ TagManager:
   - name: Dial Game
     uniqueID: 1827783827
     locked: 0
+  - name: Juicing Game
+    uniqueID: 787356055
+    locked: 0
   - name: Ingredient Selection
     uniqueID: 3810239503
     locked: 0

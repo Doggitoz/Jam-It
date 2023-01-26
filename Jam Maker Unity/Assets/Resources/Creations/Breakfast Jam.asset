@@ -16,7 +16,7 @@ MonoBehaviour:
   Type: 0
   Name: 'Breakfast '
   Recipe: BN
-  Quip: These might go great separate,but mixed together,they are even better
+  Quip: These might go great separate, but mixed together, they are even better
   IsSecret: 0
   Color: {r: 0.16078432, g: 0.047058824, b: 0.34901962, a: 1}
-  Index: 20
+  Index: 19

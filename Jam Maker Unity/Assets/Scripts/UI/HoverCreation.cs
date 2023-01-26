@@ -69,7 +69,6 @@ public class HoverCreation : MonoBehaviour
             {
                 if (curRaysastResult.gameObject.GetComponent<ImageData>() != null)
                 {
-                    Debug.Log(curRaysastResult.gameObject.name);
                     UpdateUIData(curRaysastResult.gameObject.GetComponent<ImageData>());
                     EnableHoverUI();
                     return true;

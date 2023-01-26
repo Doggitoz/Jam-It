@@ -16,7 +16,7 @@ MonoBehaviour:
   Type: 0
   Name: Very Berry
   Recipe: BRS
-  Quip: Now that is a berry good jam.
+  Quip: 'Now that is a berry good jam.  '
   IsSecret: 0
   Color: {r: 0.53333336, g: 0.078431375, b: 0.78039217, a: 1}
-  Index: 19
+  Index: 25

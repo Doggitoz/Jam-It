@@ -35,6 +35,11 @@ public class RecipeManager : MonoBehaviour
             if (ing.IngredientName == "Table")
             {
                 GameManager.GM.ClickedTable = true;
+                return GameManager.GM.SaveData.GetCreationByRecipe("Table");
+            }
+            if (ing.IngredientName == "Door")
+            {
+                GameManager.GM.ClickedTable = true;
                 return GameManager.GM.SaveData.GetCreationByRecipe("Door");
             }
         }

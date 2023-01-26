@@ -16,7 +16,8 @@ MonoBehaviour:
   Type: 0
   Name: Peach
   Recipe: P
-  Quip: 
+  Quip: 'There are literally no puns I can make with peaches that have not used already.
+    Just laugh and pretend I said something funny. '
   IsSecret: 0
-  Color: {r: 1, g: 1, b: 1, a: 1}
-  Index: 9
+  Color: {r: 0.92156863, g: 0.6392157, b: 0.5529412, a: 1}
+  Index: 8

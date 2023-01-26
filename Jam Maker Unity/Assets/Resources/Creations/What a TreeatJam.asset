@@ -16,7 +16,7 @@ MonoBehaviour:
   Type: 0
   Name: What a Treeat
   Recipe: AP
-  Quip: A great tea flavor and an even great jam flavor
+  Quip: 'A great tea flavor and an even great jam flavor '
   IsSecret: 0
   Color: {r: 0.1254902, g: 0.34509805, b: 0.10980392, a: 1}
-  Index: 26
+  Index: 21

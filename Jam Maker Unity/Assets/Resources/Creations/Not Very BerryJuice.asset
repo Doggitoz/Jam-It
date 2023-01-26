@@ -16,7 +16,7 @@ MonoBehaviour:
   Type: 1
   Name: Not Very Berry
   Recipe: AGP
-  Quip: Despite the name,it is berry good!
+  Quip: Despite the name, it is berry good!
   IsSecret: 0
   Color: {r: 0.14509805, g: 0.2784314, b: 0.5254902, a: 1}
-  Index: 16
+  Index: 28

@@ -16,8 +16,8 @@ MonoBehaviour:
   Type: 0
   Name: Steve Jobs
   Recipe: AC
-  Quip: You are now the creator of a certain company we cannot mention for legal
-    reasons. Rejoice.
+  Quip: You are now the creator of a certain company I cannot mention for legal reasons.
+    Rejoice.
   IsSecret: 0
   Color: {r: 0.5294118, g: 0.5529412, b: 0.4509804, a: 1}
-  Index: 21
+  Index: 11

@@ -16,7 +16,7 @@ MonoBehaviour:
   Type: 0
   Name: Southern Delight
   Recipe: PR
-  Quip: Peach bacon might be good,but bacon mixed with peach is awful.
+  Quip: Peach bacon might be good, but bacon mixed with peach is awful.
   IsSecret: 0
   Color: {r: 0.9254902, g: 0.6431373, b: 0.07450981, a: 1}
-  Index: 22
+  Index: 17

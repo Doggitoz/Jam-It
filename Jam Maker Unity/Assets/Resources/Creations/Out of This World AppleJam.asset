@@ -16,8 +16,8 @@ MonoBehaviour:
   Type: 0
   Name: Out of This World Apple
   Recipe: AS
-  Quip: You feel among the cosmos. You are one with the stars,then you come crashing
-    back to reality when you realize it is just an average jam."
+  Quip: 'You feel among the cosmos. You are one with the stars, then you come crashing
+    back to reality when you realize it is just an average jam. '
   IsSecret: 0
   Color: {r: 0.40392157, g: 0.12156863, b: 0.21960784, a: 1}
-  Index: 24
+  Index: 14

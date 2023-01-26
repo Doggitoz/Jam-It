@@ -16,7 +16,7 @@ MonoBehaviour:
   Type: 0
   Name: Blueberry
   Recipe: B
-  Quip: 
+  Quip: 'Does not make you feel very blue. '
   IsSecret: 0
-  Color: {r: 1, g: 1, b: 1, a: 1}
+  Color: {r: 0.08627451, g: 0.30588236, b: 0.6627451, a: 1}
   Index: 2

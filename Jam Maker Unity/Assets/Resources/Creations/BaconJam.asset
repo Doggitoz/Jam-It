@@ -16,7 +16,8 @@ MonoBehaviour:
   Type: 0
   Name: Bacon
   Recipe: N
-  Quip: 
+  Quip: 'This is just kind of gross. Like no jokes here, just please throw it away.
+    Possible light it on fire. '
   IsSecret: 0
-  Color: {r: 1, g: 1, b: 1, a: 1}
+  Color: {r: 0.4392157, g: 0.047058824, b: 0.105882354, a: 1}
   Index: 6

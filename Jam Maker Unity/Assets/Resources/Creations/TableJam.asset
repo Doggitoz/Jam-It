@@ -15,8 +15,8 @@ MonoBehaviour:
   Id: 786369672
   Type: 0
   Name: Table
-  Recipe: T
-  Quip: 
+  Recipe: Table
+  Quip: I hope the flavor is worth working on the floor.
   IsSecret: 1
-  Color: {r: 1, g: 1, b: 1, a: 1}
-  Index: 8
+  Color: {r: 0.3882353, g: 0.16470589, b: 0.08235294, a: 1}
+  Index: 9
